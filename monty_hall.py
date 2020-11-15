@@ -3,21 +3,34 @@
 from random import randint
 
 
-def monty_hall(switch):
-    if switch:
-        print('1')
-    else:
-        print('2')
+class MontyHALL:
+    monty_doors = []
+    player_chosen_door = False  # undefined
+    number_doors = 0
+    car_door_index = False  # undefined
 
+    def __init__(self, number_doors):
+        self.number_doors = number_doors
 
-def generate_monty_cases(n):
-    arr = []
-    random_car_index = randint(0, n)
-    for index in range(n):
-        if index == random_car_index:
-            arr.append(True)   # Car
+    def player_chose(self):
+        self.player_chosen_door = randint(0, self.number_doors)
+
+    def generate_monty_cases(self):
+        self.car_door_index = randint(0, self.number_doors)
+        for index in range(self.number_doors):
+            if index == self.car_door_index:
+                self.monty_doors.append(True)  # Car
+            else:
+                self.monty_doors.append(False)
+
+    def monty_reveals_details(self):
+        if self.player_chosen_door == self.player_chosen_door:
+            print('player already have the right door')
         else:
-            arr.append(False)
+            print('car is on some other door')
 
-    return arr
+    def print_monty_doors(self):
+        print(self.monty_doors)
 
+    def print_player_chosen_door(self):
+        print(self.player_chosen_door)
