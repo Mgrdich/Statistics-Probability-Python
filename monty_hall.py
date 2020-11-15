@@ -85,4 +85,4 @@ class MontyHALL:
 
 
 ob = MontyHALL(3)
-ob.start(True, 999999999999999999, False)
+ob.start(True, 10000000, False)
