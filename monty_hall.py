@@ -5,12 +5,24 @@ from random import randint
 
 class MontyHALL:
     monty_doors = []
-    player_chosen_door = False  # undefined
+    monty_reveal_data = {}
+    player_chosen_door = None
+    car_door_index = None
     number_doors = 0
-    car_door_index = False  # undefined
+    success = 0
+    experiment_number = 0
 
     def __init__(self, number_doors):
         self.number_doors = number_doors
+
+    def start(self, switch, times):
+        # start the program here
+        self.generate_monty_cases()
+        self.player_chose()
+
+
+        # end of the experiment reveal data
+        self.print_experiment_details()
 
     def player_chose(self):
         self.player_chosen_door = randint(0, self.number_doors)
@@ -23,11 +35,17 @@ class MontyHALL:
             else:
                 self.monty_doors.append(False)
 
-    def monty_reveals_details(self):
+    def monty_reveals_details_switch(self, switch):
+        # assuming th monty reveals the door since we have to intention of finding out
         if self.player_chosen_door == self.player_chosen_door:
-            print('player already have the right door')
+            if not switch:  # he is already under the right door
+                self.success = self.success + 1
         else:
-            print('car is on some other door')
+            if switch:
+                self.success = self.success + 1
+
+    def print_experiment_details(self):
+        print("s", self)
 
     def print_monty_doors(self):
         print(self.monty_doors)
