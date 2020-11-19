@@ -8,6 +8,7 @@ class MontyHALL:
     number_doors = 0
     success = 0
     experiment_number = 0
+    switch = False
 
     # changed with every go
     # number from 0 -> n
@@ -25,19 +26,22 @@ class MontyHALL:
     def start(self, switch, times=1, single_experiment_detail=False):
         # start the program here
         self.experiment_number = times
+        self.switch = switch
         experiment_times_local = times
 
         while experiment_times_local:
             self.re_initialize()
             self.car_chosen()
             self.player_chose()
-            self.monty_reveals_details_switch(switch)
+            self.monty_reveals_details_switch()
             experiment_times_local = experiment_times_local - 1
             if single_experiment_detail:
                 self.print_experiment_details()
 
         # end of the experiment reveal data
-        # self.print_results(switch)
+        self.print_results()
+        print("Strategy Switch: ", switch)
+        print("/**************************************************************/")
 
     def player_chose(self):
         self.player_chosen_door = randint(0, self.number_doors - 1)
@@ -45,13 +49,13 @@ class MontyHALL:
     def car_chosen(self):
         self.car_door_index = randint(0, self.number_doors - 1)
 
-    def monty_reveals_details_switch(self, switch):
+    def monty_reveals_details_switch(self):
         # assuming th monty reveals the door since we have to intention of finding out
         if self.car_door_index == self.player_chosen_door:
-            if not switch:  # he is already under the right door
+            if not self.switch:  # he is already under the right door
                 self.success = self.success + 1
         else:
-            if switch:  # he had chosen the wrong door at first but did switch
+            if self.switch:  # he had chosen the wrong door at first but did switch
                 self.success = self.success + 1
 
     def print_experiment_details(self):
@@ -60,14 +64,12 @@ class MontyHALL:
         self.print_player_chosen_door()
         self.print_car_position()
 
-    def print_results(self, switch):
+    def print_results(self):
         print("/**************************************************************/")
-        print("Strategy Switch: ", switch)
         print("Success: ", self.success)
         print("Losses: ", self.experiment_number - self.success)
         print("Total: ", self.experiment_number)
         print("Ratio: ", self.success / self.experiment_number)
-        print("/**************************************************************/")
 
     def print_player_chosen_door(self):
         print("Player has Chosen: ", self.player_chosen_door)
@@ -75,6 +77,10 @@ class MontyHALL:
     def print_car_position(self):
         print("Car is at :", self.car_door_index)
 
+    def abort_early(self):
+        self.print_results()
+        print("/**************************************************************/")
+
 
 ob = MontyHALL(3)
-ob.start(True, 2, True)
+ob.start(True, 200000, False)
