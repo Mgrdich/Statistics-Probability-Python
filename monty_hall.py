@@ -1,6 +1,7 @@
 # simple monty hall case with n door this checks
 # the switch vs no switch scenario
 from random import randint
+import atexit
 
 
 class MontyHALL:
@@ -83,4 +84,7 @@ class MontyHALL:
 
 
 ob = MontyHALL(3)
-ob.start(True, 200000, False)
+
+atexit.register(ob.abort_early)
+ob.start(True, 20000000, False)
+
