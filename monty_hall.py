@@ -11,7 +11,7 @@ class MontyHALL:
 
     # changed with every go
     # number from 0 -> n
-    monty_chosen_door = None
+    # monty_chosen_door = None
     player_chosen_door = None
     car_door_index = None
 
@@ -19,7 +19,6 @@ class MontyHALL:
         self.number_doors = number_doors
 
     def re_initialize(self):
-        monty_chosen_door = None
         self.player_chosen_door = None
         self.car_door_index = None
 
@@ -30,7 +29,7 @@ class MontyHALL:
 
         while experiment_times_local:
             self.re_initialize()
-            self.generate_monty_cases()
+            self.car_chosen()
             self.player_chose()
             self.monty_reveals_details_switch(switch)
             experiment_times_local = experiment_times_local - 1
@@ -38,17 +37,13 @@ class MontyHALL:
                 self.print_experiment_details()
 
         # end of the experiment reveal data
-        #self.print_results(switch)
+        # self.print_results(switch)
 
     def player_chose(self):
         self.player_chosen_door = randint(0, self.number_doors - 1)
 
-    def generate_monty_cases(self):
+    def car_chosen(self):
         self.car_door_index = randint(0, self.number_doors - 1)
-        self.monty_chosen_door = randint(0, self.number_doors - 1)
-        # if they are equal generate a new door
-        while self.car_door_index == self.monty_chosen_door:
-            self.monty_chosen_door = randint(0, self.number_doors - 1)
 
     def monty_reveals_details_switch(self, switch):
         # assuming th monty reveals the door since we have to intention of finding out
@@ -56,12 +51,12 @@ class MontyHALL:
             if not switch:  # he is already under the right door
                 self.success = self.success + 1
         else:
-            if switch:
+            if switch:  # he had chosen the wrong door at first but did switch
                 self.success = self.success + 1
 
     def print_experiment_details(self):
         # singular run detail
-        self.print_monty_doors()
+        # self.print_monty_doors()
         self.print_player_chosen_door()
         self.print_car_position()
 
@@ -74,9 +69,6 @@ class MontyHALL:
         print("Ratio: ", self.success / self.experiment_number)
         print("/**************************************************************/")
 
-    def print_monty_doors(self):
-        print("Monty Result Array:", self.monty_doors)
-
     def print_player_chosen_door(self):
         print("Player has Chosen: ", self.player_chosen_door)
 
@@ -85,4 +77,4 @@ class MontyHALL:
 
 
 ob = MontyHALL(3)
-ob.start(True, 10000000, False)
+ob.start(True, 2, True)
