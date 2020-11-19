@@ -10,7 +10,8 @@ class MontyHALL:
     experiment_number = 0
 
     # changed with every go
-    monty_doors = []  # TODO change it to a number or dictionary format
+    # number from 0 -> n
+    monty_chosen_door = None
     player_chosen_door = None
     car_door_index = None
 
@@ -18,7 +19,7 @@ class MontyHALL:
         self.number_doors = number_doors
 
     def re_initialize(self):
-        self.monty_doors = []
+        monty_chosen_door = None
         self.player_chosen_door = None
         self.car_door_index = None
 
@@ -37,22 +38,21 @@ class MontyHALL:
                 self.print_experiment_details()
 
         # end of the experiment reveal data
-        self.print_results(switch)
+        #self.print_results(switch)
 
     def player_chose(self):
         self.player_chosen_door = randint(0, self.number_doors - 1)
 
     def generate_monty_cases(self):
         self.car_door_index = randint(0, self.number_doors - 1)
-        for index in range(self.number_doors):
-            if index == self.car_door_index:
-                self.monty_doors.append(True)  # Car
-            else:
-                self.monty_doors.append(False)
+        self.monty_chosen_door = randint(0, self.number_doors - 1)
+        # if they are equal generate a new door
+        while self.car_door_index == self.monty_chosen_door:
+            self.monty_chosen_door = randint(0, self.number_doors - 1)
 
     def monty_reveals_details_switch(self, switch):
         # assuming th monty reveals the door since we have to intention of finding out
-        if self.monty_doors[self.player_chosen_door]:
+        if self.car_door_index == self.player_chosen_door:
             if not switch:  # he is already under the right door
                 self.success = self.success + 1
         else:
