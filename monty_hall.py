@@ -86,5 +86,5 @@ class MontyHALL:
 ob = MontyHALL(3)
 
 atexit.register(ob.abort_early)
-ob.start(True, 20000000, False)
+ob.start(True, 20000000000, False)
 
