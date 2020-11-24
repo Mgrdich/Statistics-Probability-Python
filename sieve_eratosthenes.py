@@ -4,11 +4,10 @@ class SIEVE_ERATOSTHENES:
     __p = 2  # prime Index
 
     def __init__(self, number_range, split_print=None):
-        self.range = [True in range(number_range + 1)]
+        self.primes_array = [True for i in range(number_range + 1)]
         self.range = number_range
-        print(range)
-        self.range[0] = False  # 0 is not a prime
-        self.range[1] = False  # 1 is not a prime
+        self.primes_array[0] = False  # 0 is not a prime
+        self.primes_array[1] = False  # 1 is not a prime
         if split_print:
             self.print_stop = split_print
 
@@ -23,10 +22,10 @@ class SIEVE_ERATOSTHENES:
 
                 self.__p += 1
 
-                # Print all prime numbers
-                for p in range(self.range + 1):
-                    if self.primes_array[p]:
-                        print(p)
+        # Print all prime numbers
+        for p in range(self.range + 1):
+            if self.primes_array[p]:
+                print(p)
 
 
 ob = SIEVE_ERATOSTHENES(100)
