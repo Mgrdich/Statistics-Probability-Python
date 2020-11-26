@@ -20,7 +20,7 @@ class SIEVE_ERATOSTHENES:
                 for i in range(self.__p * 2, self.range + 1, self.__p):
                     self.primes_array[i] = False
 
-                self.__p += 1
+            self.__p += 1
 
         # Print all prime numbers
         for p in range(self.range + 1):
