@@ -11,16 +11,16 @@ def binomial_pmf(number_trials: int, probability: float, success: int = 1) -> fl
 
 # binomial distribution probability mass function with parameter (number_trials, probability)
 def binomial_pmf_R(number_trials: int, probability: float, success: int = 0) -> float:
-    success = success + 1
-    p_over_np = (probability/1-probability)
-    success_number_trials_mix = (number_trials-success/success+1)
+    success = success + 1  # todo starting initial case for recursion
+    p_over_np = (probability / 1 - probability)
+    success_number_trials_mix = (number_trials - success / success + 1)
     return p_over_np * success_number_trials_mix * binomial_pmf_R(number_trials, probability, (success - 1))
 
 
 # binomial cumulative function P(x<=i)
 def binomial_cdf(number_trials: int, probability: float, success: int = 1) -> float:
-    return 1
+    return binomial_pmf_R(number_trials, probability, success) + binomial_pmf_R(number_trials, probability, success - 1)
 
 
 print(binomial_pmf(5, 0.5, 0))
-print(binomial_pmf_R(5, 0.5, 0))
+# print(binomial_pmf_R(5, 0.5, 0))
