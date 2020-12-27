@@ -21,5 +21,10 @@ def factorial_recursive(number: int) -> int:
     return number * factorial_recursive(number - 1)
 
 
-def combination_length(from_element: int, chose_element: int) -> int:
-    return 1
+def combination(from_element: int, chose_element: int) -> float:
+    if from_element == chose_element or chose_element == 0:  # shortcut
+        return 1
+    if chose_element == 1:
+        return from_element
+
+    return factorial(from_element) / (factorial(from_element - chose_element) * factorial(chose_element))
