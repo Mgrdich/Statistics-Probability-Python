@@ -3,13 +3,13 @@ class SIEVE_ERATOSTHENES:
     primes_array = []  # True will be indexes that are prime
     __p = 2  # prime Index
 
-    def __init__(self, number_range, split_print=None):
+    def __init__(self, number_range: int, split_print=None):
         self.primes_array = [True for i in range(number_range + 1)]
         self.range = number_range
         self.primes_array[0] = False  # 0 is not a prime
         self.primes_array[1] = False  # 1 is not a prime
         if split_print:
-            self.print_stop = split_print
+            self.print_stop = split_print  # todo check this
 
     def run(self):
         while self.__p * self.__p <= self.range:

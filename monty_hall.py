@@ -17,14 +17,14 @@ class MontyHALL:
     player_chosen_door = None
     car_door_index = None
 
-    def __init__(self, number_doors):
+    def __init__(self, number_doors: int):
         self.number_doors = number_doors
 
     def re_initialize(self):
         self.player_chosen_door = None
         self.car_door_index = None
 
-    def start(self, switch, times=1, single_experiment_detail=False):
+    def start(self, switch: bool, times: int = 1, single_experiment_detail: bool = False):
         # start the program here
         self.experiment_number = times
         self.switch = switch
@@ -87,4 +87,3 @@ ob = MontyHALL(3)
 
 atexit.register(ob.abort_early)
 ob.start(True, 20000000000, False)
-
