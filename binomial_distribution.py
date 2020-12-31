@@ -1,11 +1,13 @@
-from functions.math import combination
-from functions.math import isProb
-from functions.math import nProb
+from utilities.math import combination
+from utilities.math import isProb
+from utilities.math import nProb
 
+
+# todo turn into a decorator all the validations of the utilities
 
 # binomial distribution probability mass function with parameter (number_trials, probability) p(i)
 def binomial_pmf(number_trials: int, probability: float, success: int = 1) -> float:
-    if not isProb(probability) or number_trials < 0:  # todo turn into a decorator
+    if not isProb(probability) or number_trials < 0:
         raise ValueError('Invalid Parameter for probability')
 
     combinations = combination(number_trials, success)
@@ -16,7 +18,7 @@ def binomial_pmf(number_trials: int, probability: float, success: int = 1) -> fl
 
 # binomial distribution probability mass function with parameter (number_trials, probability) p(i)
 def binomial_pmf_R(number_trials: int, probability: float, success: int = 0) -> float:
-    if not isProb(probability) or number_trials < 0:  # todo turn into a decorator
+    if not isProb(probability) or number_trials < 0:
         raise ValueError('Invalid Parameter for probability')
 
     success = success + 1  # todo starting initial case for recursion
@@ -27,7 +29,7 @@ def binomial_pmf_R(number_trials: int, probability: float, success: int = 0) -> 
 
 # binomial cumulative function P(x<=i)
 def binomial_cdf(number_trials: int, probability: float, success: int = 1) -> float:
-    if not isProb(probability) or number_trials < 0:  # todo turn into a decorator
+    if not isProb(probability) or number_trials < 0:
         raise ValueError('Invalid Parameter for probability or Number of Trials')
 
     cumulating: float = 0.0
@@ -38,20 +40,22 @@ def binomial_cdf(number_trials: int, probability: float, success: int = 1) -> fl
     return cumulating
 
 
-# expected value of a binomial distribution
+# expected value of a binomial distribution E[X]
 def binomial_expected(number_trials: int, probability: float) -> float:
-    if not isProb(probability) or number_trials < 0:  # todo turn into a decorator
+    if not isProb(probability) or number_trials < 0:
         raise ValueError('Invalid Parameter for probability or Number of Trials')
 
     return number_trials * probability
 
 
-# variance of the expected value of binomial distribution
+# variance of the expected value of binomial distribution Var(X)
 def binomial_variance(number_trials: int, probability: float) -> float:
-    if not isProb(probability) or number_trials < 0:  # todo turn into a decorator
+    if not isProb(probability) or number_trials < 0:
         raise ValueError('Invalid Parameter for probability or Number of Trials')
 
     return number_trials * probability * nProb(probability)
 
 
 print(binomial_pmf(5, 0.5, 0))
+print(binomial_expected(5, 0.5))
+print(binomial_variance(5, 0.5))
