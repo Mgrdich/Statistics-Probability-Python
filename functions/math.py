@@ -21,10 +21,17 @@ def factorial_R(number: int) -> int:
     return number * factorial_R(number - 1)
 
 
-def combination(from_element: int, chose_element: int) -> float:
+def combination(from_element: int, chose_element: int) -> float:  # todo validation?
     if from_element == chose_element or chose_element == 0:  # shortcut
         return 1
     if chose_element == 1:
         return from_element
 
     return factorial(from_element) / (factorial(from_element - chose_element) * factorial(chose_element))
+
+
+def isProbability(num: float | int) -> bool:
+    if not isinstance(num, float) or num != 0 or num != 1:
+        return False
+
+    return 0 <= num <= 1
