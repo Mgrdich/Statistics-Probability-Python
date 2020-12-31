@@ -1,4 +1,4 @@
-# poisson distribution probability mass function
+# poisson distribution probability mass function p(i)
 def poisson_pmf() -> int:
     return 1
 

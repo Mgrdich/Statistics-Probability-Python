@@ -30,8 +30,15 @@ def combination(from_element: int, chose_element: int) -> float:  # todo validat
     return factorial(from_element) / (factorial(from_element - chose_element) * factorial(chose_element))
 
 
-def isProbability(num: float | int) -> bool:
-    if not isinstance(num, float) or num != 0 or num != 1:
+def isProb(num: float or int) -> bool:
+    if not isinstance(num, float) and num != 0 and num != 1:
         return False
 
     return 0 <= num <= 1
+
+
+def nProb(num: float or int) -> float or int:
+    if not isProb(num):
+        raise ValueError('Invalid Format')
+
+    return 1 - num
