@@ -28,14 +28,14 @@ def binomial_pmf_R(number_trials: int, probability: float, success: int = 0) -> 
 
 
 # binomial cumulative function P(x<=i)
-def binomial_cdf(number_trials: int, probability: float, success: int = 1) -> float:
+def binomial_cdf(number_trials: int, probability: float, i: int = 1) -> float:
     if not isProb(probability) or number_trials < 0:
         raise ValueError('Invalid Parameter for probability or Number of Trials')
 
     cumulating: float = 0.0
-    while success > 0:
-        cumulating += binomial_pmf(number_trials, probability, success)
-        success -= 1
+    while i > 0:
+        cumulating += binomial_pmf(number_trials, probability, i)
+        i -= 1
 
     return cumulating
 
@@ -56,6 +56,26 @@ def binomial_variance(number_trials: int, probability: float) -> float:
     return number_trials * probability * nProb(probability)
 
 
-print(binomial_pmf(5, 0.5, 0))
-print(binomial_expected(5, 0.5))
-print(binomial_variance(5, 0.5))
+def binomial_all(number_trials: int, probability: float, success: int = 1, cumulative_i: int = 1):
+    if not isProb(probability) or number_trials < 0:
+        raise ValueError('Invalid Parameter for probability or Number of Trials')
+
+    pmf = binomial_pmf(number_trials, probability, success)
+    cdf = binomial_cdf(number_trials, probability, cumulative_i)
+    mean = binomial_expected(number_trials, probability)
+    variance = binomial_variance(number_trials, probability)
+
+    print("Number of Trials =", number_trials)
+    print("p =", number_trials)
+
+    print("P( X == ", success,") = ", pmf)
+    print("P( X <=", cumulative_i, ") =", cdf)
+    print("E[X] =", mean)
+    print("Var(X) =", variance)
+
+
+# print(binomial_pmf(5, 0.5, 0))
+# print(binomial_expected(5, 0.5))
+# print(binomial_variance(5, 0.5))
+
+binomial_all(10, 0.5, 2, 4)
