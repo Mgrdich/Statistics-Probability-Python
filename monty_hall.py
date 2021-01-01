@@ -6,10 +6,10 @@ import atexit
 
 class MontyHALL:
     # constant through whole object cycle
-    number_doors = 0
-    success = 0
-    experiment_number = 0
-    switch = False
+    number_doors: int = 0
+    success: int = 0
+    experiment_number: int = 0
+    switch: bool = False
 
     # changed with every go
     # number from 0 -> n
@@ -18,11 +18,11 @@ class MontyHALL:
     car_door_index = None
 
     def __init__(self, number_doors: int):
-        self.number_doors = number_doors
+        self.number_doors: int = number_doors
 
     def re_initialize(self):
-        self.player_chosen_door = None
-        self.car_door_index = None
+        self.player_chosen_door: int or None = None
+        self.car_door_index: int or None = None
 
     def start(self, switch: bool, times: int = 1, single_experiment_detail: bool = False):
         # start the program here
@@ -45,10 +45,10 @@ class MontyHALL:
         print("/**************************************************************/")
 
     def player_chose(self):
-        self.player_chosen_door = randint(0, self.number_doors - 1)
+        self.player_chosen_door: int = randint(0, self.number_doors - 1)
 
     def car_chosen(self):
-        self.car_door_index = randint(0, self.number_doors - 1)
+        self.car_door_index: int = randint(0, self.number_doors - 1)
 
     def monty_reveals_details_switch(self):
         # assuming th monty reveals the door since we have to intention of finding out
@@ -73,10 +73,10 @@ class MontyHALL:
         print(f"Ratio: {self.success / self.experiment_number}")
 
     def print_player_chosen_door(self):
-        print(f"Player has Chosen: {self.player_chosen_door}", )
+        print(f"Player has Chosen: {self.player_chosen_door}")
 
     def print_car_position(self):
-        print(f"Car is at : {self.car_door_index}", )
+        print(f"Car is at : {self.car_door_index}")
 
     def abort_early(self):
         self.print_results()

@@ -10,9 +10,9 @@ def binomial_pmf(number_trials: int, probability: float, success: int = 1) -> fl
     if not isProb(probability) or number_trials < 0:
         raise ValueError('Invalid Parameter for probability')
 
-    combinations = combination(number_trials, success)
-    prob_win = pow(probability, success)
-    prob_lose = pow((1 - probability), (number_trials - success))
+    combinations: float = combination(number_trials, success)
+    prob_win: float = pow(probability, success)
+    prob_lose: float = pow((1 - probability), (number_trials - success))
     return combinations * prob_win * prob_lose
 
 
@@ -21,9 +21,9 @@ def binomial_pmf_R(number_trials: int, probability: float, success: int = 0) -> 
     if not isProb(probability) or number_trials < 0:
         raise ValueError('Invalid Parameter for probability')
 
-    success = success + 1  # todo starting initial case for recursion
-    p_over_np = (probability / 1 - probability)
-    success_number_trials_mix = (number_trials - success / success + 1)
+    success: int = success + 1  # todo starting initial case for recursion
+    p_over_np: float = (probability / 1 - probability)
+    success_number_trials_mix: float = (number_trials - success / success + 1)
     return p_over_np * success_number_trials_mix * binomial_pmf_R(number_trials, probability, (success - 1))
 
 
@@ -61,10 +61,10 @@ def binomial_all(number_trials: int, probability: float, success: int = 1, cumul
     if not isProb(probability) or number_trials < 0:
         raise ValueError('Invalid Parameter for probability or Number of Trials')
 
-    pmf = binomial_pmf(number_trials, probability, success)
-    cdf = binomial_cdf(number_trials, probability, cumulative_i)
-    mean = binomial_expected(number_trials, probability)
-    variance = binomial_variance(number_trials, probability)
+    pmf: float = binomial_pmf(number_trials, probability, success)
+    cdf: float = binomial_cdf(number_trials, probability, cumulative_i)
+    mean: float = binomial_expected(number_trials, probability)
+    variance: float = binomial_variance(number_trials, probability)
 
     print(f"Number of Trials = {number_trials}")
     print(f"p = {probability}")
