@@ -4,6 +4,7 @@ from utilities.math import nProb
 
 
 # todo turn into a decorator all the validations of the utilities
+# todo  add print each P(X == i)
 
 # binomial distribution probability mass function with parameter (number_trials, probability) p(i)
 def binomial_pmf(number_trials: int, probability: float, success: int = 1) -> float:
@@ -33,7 +34,7 @@ def binomial_cdf(number_trials: int, probability: float, i: int = 1) -> float:
         raise ValueError('Invalid Parameter for probability or Number of Trials')
 
     cumulating: float = 0.0
-    while i > 0:
+    while i >= 0:
         cumulating += binomial_pmf(number_trials, probability, i)
         i -= 1
 
