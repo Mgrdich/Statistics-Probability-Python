@@ -56,6 +56,7 @@ def binomial_variance(number_trials: int, probability: float) -> float:
     return number_trials * probability * nProb(probability)
 
 
+# print all data related to specific binomial distribution
 def binomial_all(number_trials: int, probability: float, success: int = 1, cumulative_i: int = 1):
     if not isProb(probability) or number_trials < 0:
         raise ValueError('Invalid Parameter for probability or Number of Trials')
@@ -68,7 +69,7 @@ def binomial_all(number_trials: int, probability: float, success: int = 1, cumul
     print("Number of Trials =", number_trials)
     print("p =", number_trials)
 
-    print("P( X == ", success,") = ", pmf)
+    print("P( X == ", success, ") = ", pmf)
     print("P( X <=", cumulative_i, ") =", cdf)
     print("E[X] =", mean)
     print("Var(X) =", variance)
