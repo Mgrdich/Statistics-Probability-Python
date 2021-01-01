@@ -67,16 +67,16 @@ class MontyHALL:
 
     def print_results(self):
         print("/**************************************************************/")
-        print("Success: ", self.success)
-        print("Losses: ", self.experiment_number - self.success)
-        print("Total: ", self.experiment_number)
-        print("Ratio: ", self.success / self.experiment_number)
+        print(f"Success: {self.success}")
+        print(f"Losses: {self.experiment_number - self.success}")
+        print(f"Total: {self.experiment_number}", )
+        print(f"Ratio: {self.success / self.experiment_number}")
 
     def print_player_chosen_door(self):
-        print("Player has Chosen: ", self.player_chosen_door)
+        print(f"Player has Chosen: {self.player_chosen_door}", )
 
     def print_car_position(self):
-        print("Car is at :", self.car_door_index)
+        print(f"Car is at : {self.car_door_index}", )
 
     def abort_early(self):
         self.print_results()
@@ -86,4 +86,4 @@ class MontyHALL:
 ob = MontyHALL(3)
 
 atexit.register(ob.abort_early)
-ob.start(True, 20000000000, False)
+ob.start(True, 10000, False)
