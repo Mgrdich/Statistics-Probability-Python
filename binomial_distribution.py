@@ -66,17 +66,17 @@ def binomial_all(number_trials: int, probability: float, success: int = 1, cumul
     mean = binomial_expected(number_trials, probability)
     variance = binomial_variance(number_trials, probability)
 
-    print("Number of Trials =", number_trials)
-    print("p =", number_trials)
+    print(f"Number of Trials = {number_trials}")
+    print(f"p = {probability}")
 
-    print("P( X == ", success, ") = ", pmf)
-    print("P( X <=", cumulative_i, ") =", cdf)
-    print("E[X] =", mean)
-    print("Var(X) =", variance)
+    print(f"P(X == {success}) = {pmf}")
+    print(f"P(X <= {cumulative_i}) = {cdf}")
+    print(f"E[X] = {mean}")
+    print(f"Var(X) = {variance}")
 
 
 # print(binomial_pmf(5, 0.5, 0))
 # print(binomial_expected(5, 0.5))
 # print(binomial_variance(5, 0.5))
 
-binomial_all(10, 0.5, 2, 4)
+binomial_all(100, 0.75, 70, 70)
