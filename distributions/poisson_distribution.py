@@ -2,12 +2,16 @@ import math
 from utilities.math import factorial
 from distributions.binomial_distribution import binomial_pmf
 from distributions.binomial_distribution import binomial_cdf
+from utilities.util import isNegative
 
 
 # todo  add print each P(X == i)
 
 # poisson distribution probability mass function p(i) i->success
 def poisson_pmf(param_lambda: float, success: int) -> float:
+    if isNegative(param_lambda):
+        raise ValueError('Invalid Parameter for probability or Number of Trials')
+
     e_n_lambda: float = math.exp(-param_lambda)
     lambda_e_i: float = param_lambda ** success
     return e_n_lambda * (lambda_e_i / factorial(success))
@@ -15,6 +19,9 @@ def poisson_pmf(param_lambda: float, success: int) -> float:
 
 # poisson cumulative distribution function P(x<=i)
 def poisson_cdf(param_lambda: float, i: int = 1) -> float:
+    if isNegative(param_lambda):
+        raise ValueError('Invalid Parameter for probability or Number of Trials')
+
     cumulating: float = 0.0
     while i >= 0:
         cumulating += poisson_pmf(param_lambda, i)
@@ -24,11 +31,17 @@ def poisson_cdf(param_lambda: float, i: int = 1) -> float:
 
 # poisson distribution expected value
 def poisson_expected(param_lambda: float) -> float:
+    if isNegative(param_lambda):
+        raise ValueError('Invalid Parameter for probability or Number of Trials')
+
     return param_lambda
 
 
 # poisson distribution variance
 def poisson_variance(param_lambda: float) -> float:
+    if isNegative(param_lambda):
+        raise ValueError('Invalid Parameter for probability or Number of Trials')
+
     return param_lambda ** 2
 
 
