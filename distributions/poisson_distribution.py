@@ -3,23 +3,30 @@ from utilities.math import factorial
 from distributions.binomial_distribution import binomial_pmf
 from distributions.binomial_distribution import binomial_cdf
 from utilities.util import isNegative
+from utilities.util import isZero
 
 
 # todo  add print each P(X == i)
 
 # poisson distribution probability mass function P(X = i) = p(i) i->success with parameter (param_lambda)
-def poisson_pmf(param_lambda: float, success: int) -> float:
+def poisson_pmf(param_lambda: float, success: int = 1) -> float:
     if isNegative(param_lambda):
         raise ValueError('Invalid Parameter for probability or Number of Trials')
 
     e_n_lambda: float = math.exp(-param_lambda)
-    lambda_e_i: float = param_lambda ** success
+    lambda_e_i: float = pow(param_lambda, success)
     return e_n_lambda * (lambda_e_i / factorial(success))
 
 
 # poisson distribution probability mass function P(X = i) = p(i) i->success with parameter (param_lambda)
-def poisson_pmf_R(param_lambda: float, success: int) -> float:
-    return 1
+def poisson_pmf_R(param_lambda: float, success: int = 1) -> float:
+    if isNegative(param_lambda):
+        raise ValueError('Invalid Parameter for probability or Number of Trials')
+
+    if isZero(success):  # initial case
+        return poisson_pmf(param_lambda, success)
+
+    return (param_lambda / success) * poisson_pmf_R(param_lambda, success - 1)
 
 
 # poisson cumulative distribution function P(x<=i)
@@ -82,4 +89,6 @@ def poisson_approximate_binomial(number_trials: int, probability: float, param_l
 
 
 # poisson_approximate_binomial(10, 0.1, 1, 1)
-poisson_all(3.2, 2, 2)
+# poisson_all(3.2, 2, 2)
+print(poisson_pmf(3.2, 8))
+print(poisson_pmf_R(3.2, 8))
