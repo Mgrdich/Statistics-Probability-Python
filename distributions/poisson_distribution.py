@@ -1,7 +1,7 @@
 import math
 from utilities.math import factorial
-from binomial_distribution import binomial_pmf
-from binomial_distribution import binomial_cdf
+from distributions.binomial_distribution import binomial_pmf
+from distributions.binomial_distribution import binomial_cdf
 
 
 # todo  add print each P(X == i)
@@ -53,12 +53,14 @@ def poisson_approximate_binomial(number_trials: int, probability: float, param_l
     cdf_poisson: float = poisson_cdf(param_lambda, success)
     pmf_binomial: float = binomial_pmf(number_trials, probability, success)
     cdf_binomial: float = binomial_cdf(number_trials, probability, success)
-    error_margin: float = abs(pmf_poisson - pmf_binomial)
+    error_margin_pmf: float = abs(pmf_poisson - pmf_binomial)
+    error_margin_cdf: float = abs(cdf_poisson - cdf_binomial)
     print(f"Poisson P(X == {success}) = {pmf_poisson}")
     print(f"Poisson P(X <= {success}) = {cdf_poisson}")
     print(f"Binomial P(X == {success}) = {pmf_binomial}")
     print(f"Binomial P(X <= {success}) = {cdf_binomial}")
-    print(f"Error Margin = {error_margin}")
+    print(f"Error Margin PMF = {error_margin_pmf}")
+    print(f"Error Margin CDF = {error_margin_cdf}")
 
 
 # poisson_approximate_binomial(10, 0.1, 1, 1)
