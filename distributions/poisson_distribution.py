@@ -7,7 +7,7 @@ from utilities.util import isNegative
 
 # todo  add print each P(X == i)
 
-# poisson distribution probability mass function p(i) i->success
+# poisson distribution probability mass function P(X = i) = p(i) i->success with parameter (param_lambda)
 def poisson_pmf(param_lambda: float, success: int) -> float:
     if isNegative(param_lambda):
         raise ValueError('Invalid Parameter for probability or Number of Trials')
@@ -15,6 +15,11 @@ def poisson_pmf(param_lambda: float, success: int) -> float:
     e_n_lambda: float = math.exp(-param_lambda)
     lambda_e_i: float = param_lambda ** success
     return e_n_lambda * (lambda_e_i / factorial(success))
+
+
+# poisson distribution probability mass function P(X = i) = p(i) i->success with parameter (param_lambda)
+def poisson_pmf_R(param_lambda: float, success: int) -> float:
+    return 1
 
 
 # poisson cumulative distribution function P(x<=i)

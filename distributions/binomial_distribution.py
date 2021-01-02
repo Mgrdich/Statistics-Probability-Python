@@ -2,12 +2,13 @@ from utilities.math import combination
 from utilities.math import isProb
 from utilities.math import nProb
 from utilities.util import isNegative
+from utilities.util import isZero
 
 
 # todo turn into a decorator all the validations of the utilities
 # todo  add print each P(X == i)
 
-# binomial distribution probability mass function with parameter (number_trials, probability) p(i)
+# binomial distribution probability mass function P(X = i) = p(i) with parameter (number_trials, probability) p(i)
 def binomial_pmf(number_trials: int, probability: float, success: int = 1) -> float:
     if not isProb(probability) or isNegative(number_trials):
         raise ValueError('Invalid Parameter for probability')
@@ -18,12 +19,14 @@ def binomial_pmf(number_trials: int, probability: float, success: int = 1) -> fl
     return combinations * prob_win * prob_lose
 
 
-# binomial distribution probability mass function with parameter (number_trials, probability) p(i)
-def binomial_pmf_R(number_trials: int, probability: float, success: int = 0) -> float:
+# binomial distribution probability mass function P(X = i) = p(i) with parameter (number_trials, probability) p(i)
+def binomial_pmf_R(number_trials: int, probability: float, success: int = 1) -> float:
     if not isProb(probability) or isNegative(number_trials):
         raise ValueError('Invalid Parameter for probability')
 
-    success: int = success + 1  # todo starting initial case for recursion
+    if isZero(success):  # initial case
+        return binomial_pmf(number_trials, probability, success)
+
     p_over_np: float = (probability / 1 - probability)
     success_number_trials_mix: float = (number_trials - success / success + 1)
     return p_over_np * success_number_trials_mix * binomial_pmf_R(number_trials, probability, (success - 1))
@@ -76,9 +79,11 @@ def binomial_all(number_trials: int, probability: float, success: int = 1, cumul
     print(f"E[X] = {mean}")
     print(f"Var(X) = {variance}")
 
-
-# print(binomial_pmf(5, 0.5, 0))
+# print(binomial_pmf(10, 0.5, 0))
+# print(binomial_pmf(10, 0.5, 0) == binomial_pmf_R(10, 0.5, 0))
 # print(binomial_expected(5, 0.5))
 # print(binomial_variance(5, 0.5))
 
-binomial_all(100, 0.75, 70, 70)
+# binomial_all(100, 0.75, 70, 70)
+
+# print(binomial_pmf_R(10, 0.5, 0))
