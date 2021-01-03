@@ -3,32 +3,44 @@ from utilities.util import isNegative
 
 
 # negative binomial probability mass function P(x=i)
-def negative_binomial_pmf(number_trials: int, probability: float, success: int = 1):
-    if not isProb(probability) or isNegative(number_trials):
+def negative_binomial_pmf(probability: float, success: int = 1, failures: int = 1):
+    if not isProb(probability) or isNegative(failures) or isNegative(failures):
         raise ValueError('Invalid Parameter for probability')
 
-    combinations: float = combination(number_trials - 1, success - 1)
+    total_trial = success + failures
+
+    combinations: float = combination(total_trial - 1, success - 1)
     prob_win: float = pow(probability, success)
-    prob_lose: float = pow((1 - probability), (number_trials - success))
+    prob_lose: float = pow(nProb(probability), failures)
     return combinations * prob_win * prob_lose
 
 
 # negative binomial cumulative distribution function P(x<=i)
-def negative_binomial_cdf(number_trials: int, probability: float, i: int = 1):
-    if not isProb(probability) or isNegative(number_trials):
+def negative_binomial_cdf(probability: float, i: int = 1, failures: int = 1):
+    if not isProb(probability) or isNegative(i) or isNegative(failures):
         raise ValueError('Invalid Parameter for probability or Number of Trials')
 
     cumulating: float = 0.0
     while i >= 0:
-        cumulating += negative_binomial_pmf(number_trials, probability, i)
+        cumulating += negative_binomial_pmf(probability, i, failures)
         i -= 1
 
     return cumulating
 
 
 # negative binomial probability mass function P(x=i)
-def negative_binomial_pmf_R(probability: float, i: int):
-    return i
+def negative_binomial_pmf_R(probability: float, success: int = 1, failures: int = 1):
+    if not isProb(probability) or isNegative(failures) or isNegative(failures):
+        raise ValueError('Invalid Parameter for probability or Number of Trials')
+
+    total_trial = success + failures
+
+    if success == 0:
+        return pow(probability, success)
+
+    x = total_trial * nProb(probability)
+    y = failures + 1
+    return negative_binomial_pmf_R(probability, success - 1, failures) * (x / y)
 
 
 # negative binomial distribution expected value
@@ -61,3 +73,7 @@ def negative_binomial_all(number_trials: int, probability: float, success: int =
     print(f"P(X <= {cumulative_i}) = {cdf}")
     print(f"E[X] = {mean}")
     print(f"Var(X) = {variance}")
+
+
+print(negative_binomial_pmf(.8, 5, 1))
+print(negative_binomial_pmf_R(.8, 5, 1))
