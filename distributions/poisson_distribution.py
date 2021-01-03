@@ -60,7 +60,7 @@ def poisson_variance(param_lambda: float) -> float:
 # print all data related to specific poisson distribution
 def poisson_all(param_lambda: float, success: int = 1, cumulative_i: int = 1):
     pmf: float = poisson_pmf(param_lambda, success)
-    cdf: float = poisson_cdf(param_lambda, success)
+    cdf: float = poisson_cdf(param_lambda, cumulative_i)
     mean: float = poisson_expected(param_lambda)
     variance: float = poisson_variance(param_lambda)
 
