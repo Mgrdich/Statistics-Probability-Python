@@ -80,6 +80,7 @@ def poisson_approximate_binomial(number_trials: int, probability: float, param_l
     cdf_binomial: float = binomial_cdf(number_trials, probability, success)
     error_margin_pmf: float = abs(pmf_poisson - pmf_binomial)
     error_margin_cdf: float = abs(cdf_poisson - cdf_binomial)
+
     print(f"Poisson P(X == {success}) = {pmf_poisson}")
     print(f"Poisson P(X <= {success}) = {cdf_poisson}")
     print(f"Binomial P(X == {success}) = {pmf_binomial}")

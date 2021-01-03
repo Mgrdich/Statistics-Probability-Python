@@ -9,10 +9,10 @@ def geometric_cdf(probability: float, i: int):
 
 
 # geometric distribution expected value
-def geometric_expected() -> float:
+def geometric_expected(probability: float) -> float:
     return 1
 
 
 # geometric distribution variance
-def geometric_variance() -> float:
+def geometric_variance(probability: float) -> float:
     return 1
