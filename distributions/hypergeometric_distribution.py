@@ -1,5 +1,5 @@
 from utilities.math import combination
-from utilities.math import isNegative
+from utilities.util import isNegative
 
 
 # hyper geometric probability mass function P(x=i) (N,m,n) N->total_trials m->number_white n->total chosen
@@ -41,7 +41,7 @@ def hyper_geometric_pmf_R(total_balls: int, total_chosen: int, number_white: int
 
     x = (number_white - success) * (total_chosen - success)
     y = (1 + success) * (1 - number_white + total_balls - total_chosen + success)
-    return (x/y) * hyper_geometric_pmf_R(total_balls, total_chosen, number_white, success-1)
+    return (x / y) * hyper_geometric_pmf_R(total_balls, total_chosen, number_white, success - 1)
 
 
 # hyper geometric distribution expected value

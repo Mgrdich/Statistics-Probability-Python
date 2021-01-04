@@ -1,7 +1,5 @@
-from utilities.math import isProb
-from utilities.math import nProb
-from utilities.math import isZero
-from utilities.math import isNegative
+from utilities.math import isProb, nProb
+from utilities.util import isNegative, isZero
 
 
 # geometric probability mass function P(x=i)

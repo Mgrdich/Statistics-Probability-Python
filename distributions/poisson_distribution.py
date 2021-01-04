@@ -1,9 +1,6 @@
 import math
 from utilities.math import factorial
-from distributions.binomial_distribution import binomial_pmf
-from distributions.binomial_distribution import binomial_cdf
-from utilities.util import isNegative
-from utilities.util import isZero
+from utilities.util import isZero, isNegative
 
 
 # todo  add print each P(X == i)

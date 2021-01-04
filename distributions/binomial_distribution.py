@@ -1,8 +1,5 @@
-from utilities.math import combination
-from utilities.math import isProb
-from utilities.math import nProb
-from utilities.util import isNegative
-from utilities.util import isZero
+from utilities.math import combination, isProb, nProb
+from utilities.util import isNegative, isZero
 
 
 # todo turn into a decorator all the validations of the utilities
