@@ -72,24 +72,6 @@ def poisson_all(param_lambda: float, success: int = 1, cumulative_i: int = 1):
     print(f"Var(X) = {variance}")
 
 
-# poisson approximation binomial
-def poisson_approximate_binomial(number_trials: int, probability: float, param_lambda: float, success: int):
-    pmf_poisson: float = poisson_pmf(param_lambda, success)
-    cdf_poisson: float = poisson_cdf(param_lambda, success)
-    pmf_binomial: float = binomial_pmf(number_trials, probability, success)
-    cdf_binomial: float = binomial_cdf(number_trials, probability, success)
-    error_margin_pmf: float = abs(pmf_poisson - pmf_binomial)
-    error_margin_cdf: float = abs(cdf_poisson - cdf_binomial)
-
-    print(f"Poisson P(X == {success}) = {pmf_poisson}")
-    print(f"Poisson P(X <= {success}) = {cdf_poisson}")
-    print(f"Binomial P(X == {success}) = {pmf_binomial}")
-    print(f"Binomial P(X <= {success}) = {cdf_binomial}")
-    print(f"Error Margin PMF = {error_margin_pmf}")
-    print(f"Error Margin CDF = {error_margin_cdf}")
-
-
-# poisson_approximate_binomial(10, 0.1, 1, 1)
 # poisson_all(3.2, 2, 2)
 print(poisson_pmf(3.2, 8))
 print(poisson_pmf_R(3.2, 8))
