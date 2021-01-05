@@ -26,7 +26,7 @@ def hyper_geometric_cdf(total_balls: int, total_chosen: int, number_white: int, 
         raise ValueError('Invalid Parameter')
 
     cumulating: float = 0.0
-    while i >= 0:
+    while i >= limit:
         cumulating += hyper_geometric_pmf(total_balls, total_chosen, number_white, i)
         i -= 1
 
@@ -98,4 +98,4 @@ def hyper_geometric_all(total_balls: int, total_chosen: int, number_white: int, 
 
 
 print(hyper_geometric_pmf(10, 7, 4, 2))
-print(hyper_geometric_pmf_R(10, 7, 4, 2))
+print(hyper_geometric_cdf(10, 7, 4, 2))
