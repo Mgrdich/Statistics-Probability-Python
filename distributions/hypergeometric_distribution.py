@@ -97,5 +97,5 @@ def hyper_geometric_all(total_balls: int, total_chosen: int, number_white: int, 
     print(f"Var(X) = {variance}")
 
 
-print(hyper_geometric_pmf(10, 7, 4, 2))
-print(hyper_geometric_cdf(10, 7, 4, 2))
+# print(hyper_geometric_pmf(10, 7, 4, 2))
+# print(hyper_geometric_cdf(10, 7, 4, 2))

@@ -33,7 +33,7 @@ def combination(from_element: int, chose_element: int) -> float:
     if chose_element == 1:
         return from_element
 
-    return factorial(from_element) / (factorial(from_element - chose_element) * factorial(chose_element))
+    return factorial(from_element) // (factorial(from_element - chose_element) * factorial(chose_element))
 
 
 def isProb(num: float or int) -> bool:
