@@ -4,11 +4,11 @@ from utilities.util import isNegative
 
 # hyper geometric probability mass function P(x=i) (N,m,n) N->total_trials m->number_white n->total chosen
 def hyper_geometric_pmf(total_balls: int, total_chosen: int, number_white: int, success: int) -> float:
-    not_valid1 = isNegative(total_chosen - total_chosen) or isNegative(total_balls - number_white)
-    limit = total_chosen - total_balls + number_white
-    not_valid2 = limit < success < min(total_chosen, number_white)
+    not_valid1 = isNegative(total_chosen - total_chosen)
+    limit = max(0, total_chosen - total_balls + number_white)
+    valid2 = limit <= success <= min(total_chosen, number_white)
 
-    if not_valid1 or not_valid2:
+    if not_valid1 or not valid2:
         raise ValueError('Invalid Parameter')
 
     x = combination(number_white, success) * combination(total_balls - number_white, total_chosen - success)
@@ -18,11 +18,11 @@ def hyper_geometric_pmf(total_balls: int, total_chosen: int, number_white: int, 
 
 # hyper geometric cumulative distribution function P(x<=i)
 def hyper_geometric_cdf(total_balls: int, total_chosen: int, number_white: int, i: int) -> float:
-    not_valid1 = isNegative(total_balls - total_chosen)
-    limit = total_chosen - total_balls + number_white
-    not_valid2 = limit < i < min(total_chosen, number_white)
+    not_valid1 = isNegative(total_chosen - total_chosen)
+    limit = max(0, total_chosen - total_balls + number_white)
+    valid2 = limit <= i <= min(total_chosen, number_white)
 
-    if not_valid1 or not_valid2:
+    if not_valid1 or not valid2:
         raise ValueError('Invalid Parameter')
 
     cumulating: float = 0.0
@@ -35,11 +35,11 @@ def hyper_geometric_cdf(total_balls: int, total_chosen: int, number_white: int, 
 
 # hyper geometric probability mass function P(x=i) (N,m,n) N->total_trials m->number_white n->total chosen
 def hyper_geometric_pmf_R(total_balls: int, total_chosen: int, number_white: int, success: int) -> float:
-    not_valid1 = isNegative(total_balls - total_chosen)
-    limit = total_chosen - total_balls + number_white
-    not_valid2 = limit < success < min(total_chosen, number_white)
+    not_valid1 = isNegative(total_chosen - total_chosen)
+    limit = max(0, total_chosen - total_balls + number_white)
+    valid2 = limit <= success <= min(total_chosen, number_white)
 
-    if not_valid1 or not_valid2:
+    if not_valid1 or not valid2:
         raise ValueError('Invalid Parameter')
 
     if success == limit:
@@ -74,9 +74,10 @@ def hyper_geometric_variance(total_balls: int, total_chosen: int, number_white: 
 # print all data related to specific hyper geometric distribution
 def hyper_geometric_all(total_balls: int, total_chosen: int, number_white: int, success: int, cumulative_i: int = 1):
     not_valid1 = isNegative(total_balls - total_chosen)
-    limit = total_chosen - total_balls + number_white
-    not_valid2 = limit < success < min(total_chosen, number_white)
-    if not_valid1 or not_valid2:
+    limit = max(0, total_chosen - total_balls + number_white)
+    valid2 = limit <= success <= min(total_chosen, number_white)
+
+    if not_valid1 or not valid2:
         raise ValueError('Invalid Parameter')
 
     pmf: float = hyper_geometric_pmf(total_balls, total_chosen, number_white, success)
@@ -94,6 +95,5 @@ def hyper_geometric_all(total_balls: int, total_chosen: int, number_white: int, 
     print(f"E[X] = {mean}")
     print(f"Var(X) = {variance}")
 
-
-print(hyper_geometric_pmf(10, 7, 3, 1))
+print(hyper_geometric_pmf(10, 7, 3, 1)) #todo calculate see which one is the wrong then fix that one
 print(hyper_geometric_pmf_R(10, 7, 3, 1))
