@@ -45,9 +45,10 @@ def hyper_geometric_pmf_R(total_balls: int, total_chosen: int, number_white: int
     if success == limit:
         return hyper_geometric_pmf(total_balls, total_chosen, number_white, success)
 
+    success -= 1
     x = (number_white - success) * (total_chosen - success)
     y = (1 + success) * (1 - number_white + total_balls - total_chosen + success)
-    return (x / y) * hyper_geometric_pmf_R(total_balls, total_chosen, number_white, success - 1)
+    return (x / y) * hyper_geometric_pmf_R(total_balls, total_chosen, number_white, success)
 
 
 # hyper geometric distribution expected value
@@ -95,5 +96,6 @@ def hyper_geometric_all(total_balls: int, total_chosen: int, number_white: int, 
     print(f"E[X] = {mean}")
     print(f"Var(X) = {variance}")
 
-print(hyper_geometric_pmf(10, 7, 3, 1)) #todo calculate see which one is the wrong then fix that one
-print(hyper_geometric_pmf_R(10, 7, 3, 1))
+
+print(hyper_geometric_pmf(10, 7, 4, 2))
+print(hyper_geometric_pmf_R(10, 7, 4, 2))
