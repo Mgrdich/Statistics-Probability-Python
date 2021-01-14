@@ -22,7 +22,7 @@ def poisson_approximate_binomial(number_trials: int, probability: float, param_l
 
 # hyper geometric approximation binomial
 def hyper_geometric_binomial(total_balls: int, total_chosen: int, number_white: int, success: int):
-
+    # todo something is going wrong
     pmf_hyper_geometric: float = hyper_geometric_pmf(total_balls, total_chosen, number_white, success)
     cdf_hyper_geometric: float = hyper_geometric_cdf(total_balls, total_chosen, number_white, success)
 
